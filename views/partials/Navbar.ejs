@@ -10,21 +10,41 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
+                <%if(locals.user){%>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Add Blog</a>
                 </li>
 
-                <!-- DropDown Menu  -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      USER
+                      <%=user.name%>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Logout</a></li>
+                      <li><a class="dropdown-item" href="/user/destroy">Logout</a></li>
                     </ul>
                   </li>
+                <%}else{%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/signup">Signup</a>
+                    </li>
+                <%}%>
+                
 
             </ul>
         </div>
     </div>
 </nav>
+
+<%if(locals.err){%>
+    <div class="container">
+        
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%=err%>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+       
+    </div>
+    <%}%>
