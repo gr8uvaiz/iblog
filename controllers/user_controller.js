@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const Auth = require('../services/auth')
+const hash = require('../services/hashPassword')
+
 module.exports.login = function (req, res) {
     if (!req.user) {
         return res.render('login', {
@@ -18,14 +20,16 @@ module.exports.signup = function (req, res) {
     }
     return res.redirect('/')
 }
+
 module.exports.createUser = async function (req, res) {
     const { name, email, password } = req.body;
     const user = await User.findOne({ email });
+    const hashPassword = await hash.hashPasswordfunc(password);
     if (!user) {
         await User.create({
             name: name,
             email: email,
-            password: password,
+            password: hashPassword,
         })
     }
     else {
@@ -39,8 +43,10 @@ module.exports.createUser = async function (req, res) {
 
 module.exports.authenticateUser = async function (req, res) {
     const { email, password } = req.body;
-    const user = await User.findOne({ email })
-    if (user && password === user.password) {
+    const user = await User.findOne({ email });
+    try {
+    const checkPassword = await hash.checkHashPassword(password,user.password);
+    if (user && checkPassword) {
         const token = Auth.setUser(user);
         res.cookie("uid", token);
         return res.redirect('/')
@@ -51,6 +57,13 @@ module.exports.authenticateUser = async function (req, res) {
             err: "Invalid Username or password"
         })
     }
+    } catch (error) {
+        return res.render('login',{
+            title: "Login | IBlog",
+            err: "User Not exist Please Sign Up"
+        })
+    }
+    
 }
 module.exports.destroy = function (req, res) {
     res.clearCookie('uid');
