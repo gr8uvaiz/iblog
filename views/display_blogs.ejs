@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+</head>
+<%-include('./partials/bootstrapStyles')-%>
+<body>
+    <%-include('./partials/Navbar')%>
+
+    <div class="container mt-4">
+        <div class="container">
+            <h1 class="mb-4"><%=blog.title%></h1>
+            <h5><strong>Author~ </strong><%=blog.createdBy.name%></h5>
+        </div>
+       
+    <img src="<%=blogImg%>" alt="" class="w-75 h-75" style="object-fit: cover;">
+    <p style="white-space: pre-wrap"><%=blog.content%></p>
+    <input type="text" placeholder="Enter Your Comment">
+    <button class="btn btn-primary">Comment</button>
+    </div>
+
+
+
+
+
+    <%-include('./partials/bootstrapScripts')-%>
+</body>
+</html>
