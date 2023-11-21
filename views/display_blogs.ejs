@@ -9,17 +9,43 @@
 <body>
     <%-include('./partials/Navbar')%>
 
+    <%if(locals.blog){%>
     <div class="container mt-4">
         <div class="container">
             <h1 class="mb-4"><%=blog.title%></h1>
             <h5><strong>Author~ </strong><%=blog.createdBy.name%></h5>
+            <%if(user._id == blog.createdBy._id){%>
+            <a href="/blog/destroy/<%=blog._id%>">Delete Blog</a>
+            <%}%>
         </div>
-       
     <img src="<%=blogImg%>" alt="" class="w-75 h-75" style="object-fit: cover;">
     <p style="white-space: pre-wrap"><%=blog.content%></p>
-    <input type="text" placeholder="Enter Your Comment">
-    <button class="btn btn-primary">Comment</button>
-    </div>
+</div>
+<%}else{%>
+    <h1>Blog Not Found</h1>
+    <%}%>
+
+
+
+<form class="container" action="/comment/create" method="post">
+<input type="text" name="content" placeholder="Enter Your Comment">
+<input type="hidden" name="blogId" value="<%=blog._id%>">
+<button type="submit"class="btn btn-primary">Comment</button>
+</form>
+<div class="container">
+    <ul>
+        <%blog.comment.forEach((comment) => {%>
+                <li><%=comment.content%>
+                    <small>~ <%=comment.createdBy.name%></small>
+                    <%if(locals.user._id == comment.createdBy._id){%>
+                    <a href="/comment/destroy/<%=comment._id%>">X</a>
+                    <%}%>
+                </li>
+           
+        <% })%>
+    </ul>
+</div>
+
 
 
 
