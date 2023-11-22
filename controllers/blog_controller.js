@@ -20,7 +20,7 @@ module.exports.create = async function(req,res){
 }
 module.exports.showBlogs =  async function(req,res){
     try {
-        if(req.user){
+      
             const id = req.params.id;
             const blog = await Blog.findById(id).populate('createdBy')
             .populate({
@@ -36,10 +36,6 @@ module.exports.showBlogs =  async function(req,res){
                 blogImg: blogImg,
                 user: req.user
             })
-        }
-        else{
-            res.redirect('/user/login')
-        }
         
     } catch (error) {
         console.log('Error In Showing Blogs')
@@ -50,10 +46,15 @@ module.exports.showBlogs =  async function(req,res){
 }
 module.exports.destroy = async function(req,res){
     try {
-        const BlogId = req.params.id;
-        const comment = await Comment.deleteMany({associatedBlog: BlogId});
-        const blog = await Blog.findByIdAndDelete(BlogId);
-        res.redirect('/')
+        if(req.user){
+            const BlogId = req.params.id;
+            const comment = await Comment.deleteMany({associatedBlog: BlogId});
+            const blog = await Blog.findByIdAndDelete(BlogId);
+            return res.redirect('/')
+        }
+        else{
+            return res.redirect('back')
+        }
         
     } catch (error) {
         console.log("Error In Deleting Blog")

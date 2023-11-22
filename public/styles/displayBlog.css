@@ -1,0 +1,18 @@
+.content{
+    max-height: 10rem;
+    overflow: hidden;
+}
+#readMore{
+    cursor: pointer;
+    color: red;
+}
+#readMore2{
+    cursor: pointer;
+    color: red;
+}
+.blogImg{
+    object-fit: cover;
+    width: 18rem;
+    height: 20rem;
+    border-radius: 5%;
+}

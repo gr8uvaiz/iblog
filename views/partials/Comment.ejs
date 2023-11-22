@@ -1,0 +1,30 @@
+<div class="container">
+    <h1>Comments (<%=blog.comment.length%>)</h1>
+</div>
+<div class="container">
+    <form class="d-flex align-items-center" action="/comment/create" method="post">
+        <input required class="p-2" type="text" name="content" placeholder="Enter Your Comment">
+        <input type="hidden" name="blogId" value="<%=blog._id%>">
+    <button  type="submit"class="btn mx-2 btn-danger">Comment</button>
+    </form>
+</div>
+<div class="container my-4" >
+
+    <div class="container rounded p-2"  style="background-color: #fcf1f1;" >
+        <ul class="content" id="content2">
+            <%blog.comment.forEach((comment) => {%>
+                <div class="my-4">
+                    <small> ~<%=comment.createdBy.name%></small>
+                    <div class="d-flex">
+                        <li class="mx-2"><%=comment.content%></li>
+                        <%if(locals.user && locals.user._id == comment.createdBy._id){%>
+                            <a class="anchor" href="/comment/destroy/<%=comment._id%>">X</a>
+                            <%}%>
+                        </div>
+                    </div>
+                    <% })%>
+                </ul>
+                <small id="readMore2">Read More..</small>
+            </div>
+    
+</div>

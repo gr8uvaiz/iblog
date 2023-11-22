@@ -1,0 +1,20 @@
+li{
+    list-style: none;
+}
+.anchor{
+    text-decoration: none;
+    color: red;
+}
+body div.container p {
+    margin: 0;
+}
+body div.container ul {
+    margin: 0;
+}
+body div.container input{
+    border-radius: 12px; border: 0px solid gray; outline: none; background-color: #efefef;
+}
+
+.red-bg-light{
+    background-color: rgb(250, 67, 67);
+}
