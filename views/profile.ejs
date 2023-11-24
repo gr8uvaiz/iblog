@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <%-include('./partials/bootstrapStyles')%>
+</head>
+<body>
+    <%-include('./partials/Navbar')%>
+
+    <div class="container text-center" style=" height: 450px;">
+        <img class="my-4 setBg" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" >
+        <h2 class="text-danger" style="font-weight: 700;"><%=tempUser.name%></h2>
+        <p style="white-space: pre-wrap;"><%=tempUser.bio%></p>
+    </div>
+    <hr>
+    <div class="container ">
+        <h2 class="text-center">Blogs</h2>
+        <%-include('./partials/Card')%>
+    </div>
+    
+</body>
+<%-include('./partials/bootstrapScripts')%>
+</html>

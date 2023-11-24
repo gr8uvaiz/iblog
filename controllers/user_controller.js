@@ -22,7 +22,7 @@ module.exports.signup = function (req, res) {
 }
 
 module.exports.createUser = async function (req, res) {
-    const { name, email, password } = req.body;
+    const { name, email, password, bio } = req.body;
     const user = await User.findOne({ email });
     const hashPassword = await hash.hashPasswordfunc(password);
     if (!user) {
@@ -30,6 +30,7 @@ module.exports.createUser = async function (req, res) {
             name: name,
             email: email,
             password: hashPassword,
+            bio: bio,
         })
     }
     else {
@@ -67,5 +68,5 @@ module.exports.authenticateUser = async function (req, res) {
 }
 module.exports.destroy = function (req, res) {
     res.clearCookie('uid');
-    return res.redirect('/');
+    return res.redirect('/user/login');
 }

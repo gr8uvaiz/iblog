@@ -18,3 +18,12 @@ body div.container input{
 .red-bg-light{
     background-color: rgb(250, 67, 67);
 }
+.setBg{
+    background-position: center;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+
+}

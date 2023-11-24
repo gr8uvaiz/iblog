@@ -50,7 +50,7 @@ module.exports.destroy = async function(req,res){
             const BlogId = req.params.id;
             const comment = await Comment.deleteMany({associatedBlog: BlogId});
             const blog = await Blog.findByIdAndDelete(BlogId);
-            return res.redirect('/')
+            return res.redirect('back')
         }
         else{
             return res.redirect('back')

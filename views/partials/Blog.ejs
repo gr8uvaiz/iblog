@@ -2,9 +2,9 @@
     <div class="container mt-4">
         <div>
             <div class="d-flex align-items-center justify-content-between" style="width: 18rem;">
-                <p style="font-size: 1.2rem; cursor: pointer;"><%=blog.createdBy.name%></p>
-                
-                   
+                <a style="text-decoration: none; color: black;" href="/user/profile/<%=blog.createdBy._id%>">
+                    <p style="font-size: 1.2rem; cursor: pointer;"><%=blog.createdBy.name%></p>
+                </a>
                     <%if(locals.user && user._id == blog.createdBy._id){%>
                     <a class="anchor mx-2" href="/blog/destroy/<%=blog._id%>">Delete</a>
                     <%}%>

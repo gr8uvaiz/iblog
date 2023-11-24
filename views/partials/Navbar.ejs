@@ -1,33 +1,43 @@
+<style>
+    .liNav:hover{
+        background-color: #e0e0e0;
+        transition: 0.3s ease-in-out;
+    }.liNav{
+        margin: 0px 10px;
+        border-radius: 12px;
+    }
+</style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand text-danger" style="font-weight: bolder;" href="/">IBlog</a>
+        <a class="navbar-brand text-danger" style="font-weight: bold;" href="/">IBlog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <li class="nav-item liNav">
+                    <a  class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <%if(locals.user){%>
-                <li class="nav-item">
+                <li class="nav-item liNav">
                     <a class="nav-link" href="/blog/">Add Blog</a>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown liNav">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <%=user.name%>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="/user/destroy">Logout</a></li>
+                      <li class="liNav"><a class="dropdown-item" href="/user/profile/<%=user._id%>">My Profile</a></li>
+                      <li class="liNav"><a class="dropdown-item" href="/user/destroy">Logout</a></li>
                     </ul>
                   </li>
                 <%}else{%>
-                    <li class="nav-item">
+                    <li class="nav-item liNav">
                         <a class="nav-link" href="/user/login">Login</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item liNav">
                         <a class="nav-link" href="/user/signup">Signup</a>
                     </li>
                 <%}%>
