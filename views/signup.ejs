@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title><%= title %></title>
 </head>
-<%-include('./partials/bootstrapStyles')-%>
+<%- include('./partials/bootstrapStyles') -%>
 <body>
-    <%-include('./partials/Navbar')-%>
+    <%- include('./partials/Navbar') -%>
 
-    <div class="container mt-4 text-center m-auto"style="max-width: 350px;">
-        <form action="/user/createUser" method="post">
+    <div class="container mt-4 text-center m-auto" style="max-width: 350px;">
+        <form id="userForm" action="/user/createUser" method="post" enctype="multipart/form-data">
         
-            <h1 class="h3 mb-3 text-danger  fw-normal">Create Account</h1>
+            <h1 class="h3 mb-3 text-danger fw-normal">Create Account</h1>
     
+            <div class="form-floating my-4">
+                <input required name="file" type="file" class="form-control" id="profilePhotoInput" accept=".jpg, .jpeg, .png" />
+                <label for="profilePhotoInput">Add Profile Photo</label>
+            </div>
             <div class="form-floating my-4">
                 <input required name="name" type="text" class="form-control" id="floatingInput" placeholder="Enter Your Name">
                 <label for="floatingInput">Name</label>
@@ -30,12 +34,28 @@
                 <input required name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
+
             <button class="btn btn-danger w-50 py-2" type="submit">Create Account</button>
         </form>
-    
     </div>
 
-<%-include('./partials/bootstrapScripts')-%>
+    <%- include('./partials/bootstrapScripts') -%>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function (event) {
+            const fileInput = document.getElementById('profilePhotoInput');
+            
+            if (fileInput.files.length > 0) {
+                const fileSize = fileInput.files[0].size; // in bytes
+                const maxSize = 5 * 1024 * 1024; // 5 MB limit
+
+                if (fileSize > maxSize) {
+                    alert('File size exceeds the limit. Please choose a smaller file.');
+                    event.preventDefault(); // Prevent the form submission
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>

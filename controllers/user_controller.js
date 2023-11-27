@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Auth = require('../services/auth')
 const hash = require('../services/hashPassword')
+const {uploadOnCloudinary} = require('../services/cloudinary')
 
 module.exports.login = function (req, res) {
     if (!req.user) {
@@ -25,12 +26,14 @@ module.exports.createUser = async function (req, res) {
     const { name, email, password, bio } = req.body;
     const user = await User.findOne({ email });
     const hashPassword = await hash.hashPasswordfunc(password);
+    const uploadResult = await uploadOnCloudinary(req.file.filename);
     if (!user) {
         await User.create({
             name: name,
             email: email,
             password: hashPassword,
             bio: bio,
+            profileImg: uploadResult.secure_url
         })
     }
     else {

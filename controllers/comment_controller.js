@@ -27,7 +27,9 @@ module.exports.destroy = async function(req,res){
     try {
         if(req.user){
             const commentId = req.params.id;
-            await Comment.findByIdAndDelete(commentId);
+            const comment = await Comment.findByIdAndDelete(commentId);
+            const blogId = comment.associatedBlog;
+            await Blog.findByIdAndUpdate(blogId,{$pull: {comment: req.params.id}});
             return res.redirect('back')
         }
         return res.redirect('back')
