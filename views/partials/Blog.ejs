@@ -1,16 +1,18 @@
 <%if(locals.blog){%>
     <div class="container mt-4">
         <div>
-            <div class="d-flex align-items-center justify-content-between" style="width: 18rem;">
-                <a style="text-decoration: none; color: black;" href="/user/profile/<%=blog.createdBy._id%>">
-                    <p style="font-size: 1.2rem; cursor: pointer;"><%=blog.createdBy.name%></p>
-                </a>
-                    <%if(locals.user && user._id == blog.createdBy._id){%>
-                    <a class="anchor mx-2" href="/blog/destroy/<%=blog._id%>">Delete</a>
-                    <%}%>
-                
+            <a style="text-decoration: none; color: black;" href="/user/profile/<%=blog.createdBy._id%>">
+            <div class="d-flex align-items-center" style="width: 18rem;">
+                <img src="<%=blog.createdBy.profileImg%>" alt="" class="blogUserImg">
+                <p style="margin-left: 10px; font-size: 1.2rem; cursor: pointer;"><%=blog.createdBy.name%></p>
+                </div>
+            </a>
+            <div>
+                <h3 class="mt-4"><%=blog.title%></h3>
+                <%if(locals.user && user._id == blog.createdBy._id){%>
+                    <a class="anchor" href="/blog/destroy/<%=blog._id%>">Delete Blog</a>
+                <%}%>
             </div>
-            <h3 class="my-4"><%=blog.title%></h3>
             <img src="<%=blog.coverImageUrl%>" alt="" class="blogImg">
         </div>
         <div class="container my-4 p-2 rounded" style="background-color: #fcf1f1;">
