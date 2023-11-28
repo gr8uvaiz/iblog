@@ -9,7 +9,7 @@
             </a>
             <div>
                 <h3 class="mt-4"><%=blog.title%></h3>
-                <%if(locals.user && user._id == blog.createdBy._id){%>
+                <%if(locals.user && (user._id == blog.createdBy._id || user.role == 'ADMIN')){%>
                     <a class="anchor" href="/blog/destroy/<%=blog._id%>">Delete Blog</a>
                 <%}%>
             </div>
