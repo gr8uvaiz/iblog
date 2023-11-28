@@ -3,14 +3,18 @@
         <div>
             <a style="text-decoration: none; color: black;" href="/user/profile/<%=blog.createdBy._id%>">
             <div class="d-flex align-items-center" style="width: 18rem;">
-                <img src="<%=blog.createdBy.profileImg%>" alt="" class="blogUserImg">
+                <img src="<%=blog.createdBy.profileImg%>" alt="" style="object-fit: cover;
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;">
                 <p style="margin-left: 10px; font-size: 1.2rem; cursor: pointer;"><%=blog.createdBy.name%></p>
                 </div>
             </a>
             <div>
                 <h3 class="mt-4"><%=blog.title%></h3>
                 <%if(locals.user && (user._id == blog.createdBy._id || user.role == 'ADMIN')){%>
-                    <a class="anchor" href="/blog/destroy/<%=blog._id%>">Delete Blog</a>
+                    <a style="text-decoration: none;
+                    color: red;" href="/blog/destroy/<%=blog._id%>">Delete Blog</a>
                 <%}%>
             </div>
             <img src="<%=blog.coverImageUrl%>" alt="" class="blogImg">
