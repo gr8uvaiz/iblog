@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
 
-const secret = '@Uvaiz123'
+dotenv.config({path: './config.env'});
+
+const secret = process.env.JWT_SECRET;
 
 module.exports.setUser = function(user){
     return jwt.sign({
