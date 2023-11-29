@@ -13,7 +13,8 @@ cloudinary.config({
 module.exports.uploadOnCloudinary = async function(fileName){
     try {
         if(!fileName) return null;
-        const uploadsDirectory = path.resolve(__dirname,'../public/uploads/');
+        // const uploadsDirectory = path.resolve(__dirname,'../public/uploads/');
+        const uploadsDirectory = path.resolve(__dirname, '../../public/uploads/');
         const filePath = path.join(uploadsDirectory, fileName);
         const result = await cloudinary.uploader.upload(filePath);
         if(result) fs.unlinkSync(filePath)
