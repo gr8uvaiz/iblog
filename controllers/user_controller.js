@@ -1,7 +1,8 @@
 const User = require('../models/user');
 const Auth = require('../services/auth')
 const hash = require('../services/hashPassword')
-const {uploadOnCloudinary} = require('../services/cloudinary')
+const {uploadOnCloudinary} = require('../services/cloudinary');
+const { UploadStream } = require('cloudinary');
 
 module.exports.login = function (req, res) {
     if (!req.user) {
@@ -23,6 +24,7 @@ module.exports.signup = function (req, res) {
 }
 
 module.exports.createUser = async function (req, res) {
+    try {
     const { name, email, password, bio } = req.body;
     const user = await User.findOne({ email });
     const hashPassword = await hash.hashPasswordfunc(password);
@@ -43,6 +45,11 @@ module.exports.createUser = async function (req, res) {
         })
     }
     return res.redirect('/user/login');
+
+    } catch (error) {
+        res.status(500).send("Error In the CreateUser Controller")
+        
+}
 }
 
 module.exports.authenticateUser = async function (req, res) {
